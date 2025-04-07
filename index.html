@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Kerja Harian</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Jadwal Kerja Harian</h1>
+
+        <!-- Form untuk input data -->
+        <div class="form-container">
+            <input type="date" id="tanggal" />
+            <input type="time" id="jam" />
+            <input type="text" id="namaKegiatan" placeholder="Nama Kegiatan" />
+            <input type="text" id="keterangan" placeholder="Keterangan" />
+            <button onclick="addSchedule()">Tambah Jadwal</button>
+        </div>
+
+        <!-- Tabel untuk menampilkan jadwal -->
+        <table id="scheduleTable">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
+                    <th>Nama Kegiatan</th>
+                    <th>Keterangan</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <button onclick="generatePDF()">Download Laporan (PDF)</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
