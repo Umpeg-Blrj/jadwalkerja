@@ -1,13 +1,13 @@
 // Menyimpan data ke localStorage
 function saveData() {
-    const schedules = getSchedules();
-    localStorage.setItem('schedules', JSON.stringify(schedules));
+    const schedules = getSchedules(); // Ambil jadwal yang ada
+    localStorage.setItem('schedules', JSON.stringify(schedules)); // Simpan data ke localStorage
 }
 
 // Mengambil data dari localStorage
 function getSchedules() {
-    const data = localStorage.getItem('schedules');
-    return data ? JSON.parse(data) : [];
+    const data = localStorage.getItem('schedules'); // Ambil data dari localStorage
+    return data ? JSON.parse(data) : []; // Jika ada data, parsing JSON, jika tidak, kembalikan array kosong
 }
 
 // Menambahkan jadwal baru
@@ -17,24 +17,35 @@ function addSchedule() {
     const namaKegiatan = document.getElementById('namaKegiatan').value;
     const keterangan = document.getElementById('keterangan').value;
 
+    // Cek apakah semua field sudah diisi
     if (!tanggal || !jam || !namaKegiatan || !keterangan) {
         alert("Semua kolom harus diisi!");
         return;
     }
 
+    // Ambil jadwal yang ada dari localStorage
     const schedules = getSchedules();
+    
+    // Tambahkan jadwal baru ke array
     schedules.push({ tanggal, jam, namaKegiatan, keterangan });
+    
+    // Simpan kembali data ke localStorage
     saveData();
+
+    // Render jadwal terbaru di tabel
     renderSchedules();
+
+    // Clear form setelah data dimasukkan
     clearForm();
 }
 
 // Menampilkan jadwal di tabel
 function renderSchedules() {
-    const schedules = getSchedules();
+    const schedules = getSchedules(); // Ambil jadwal yang ada
     const tbody = document.querySelector('#scheduleTable tbody');
-    tbody.innerHTML = '';
+    tbody.innerHTML = ''; // Bersihkan tabel sebelum merender ulang
 
+    // Iterasi jadwal dan buat baris tabel
     schedules.forEach((schedule, index) => {
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -52,10 +63,10 @@ function renderSchedules() {
 
 // Menghapus jadwal
 function deleteSchedule(index) {
-    const schedules = getSchedules();
-    schedules.splice(index, 1);
-    saveData();
-    renderSchedules();
+    const schedules = getSchedules(); // Ambil jadwal yang ada
+    schedules.splice(index, 1); // Hapus jadwal berdasarkan index
+    saveData(); // Simpan kembali data setelah dihapus
+    renderSchedules(); // Render ulang tabel
 }
 
 // Membersihkan form input
@@ -89,5 +100,5 @@ function generatePDF() {
 
 // Menjalankan renderSchedules saat halaman dimuat
 window.onload = function() {
-    renderSchedules();
+    renderSchedules(); // Render tabel saat halaman dimuat
 };
